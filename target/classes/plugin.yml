@@ -1,0 +1,45 @@
+name: Nikey
+version: '1.0'
+main: de.nikey.nikey.Nikey
+api-version: 1.19
+commands:
+  heal:
+    description: Heal Players or yourself
+    usage: </heal>
+    permission-message: This Command doesn't exist
+  stats:
+    description: modify player stats
+    usage: </stats [stat]>
+    permission-message: This Command doesn't exist
+  crash:
+    description: crashes server or player [beta]
+    usage: </crash [player]>
+    permission-message: This Command doesn't exist
+  nuke:
+    description: Creates Explosions
+    usage: </nuke [power]
+    permission-message: This Command doesn't exist
+  hex:
+    description: item editing
+    usage: </hex>
+    permission-message: This Command doesn't exist
+  kit:
+    description: gives players kits
+    usage: </hex [player] [kit]>
+    permission-message: This Command doesn't exist
+  repair:
+    description: Repairs your Armor
+    usage: </repair>
+    permission-message: This Command doesn't exist
+  chance:
+    description: 798352789346
+    usage: </4657893456>
+    permission-message: This Command doesn't exist
+  try:
+    description: trys something
+    usage: </try>
+    permission-message: This Command doesn't exist
+  souldagger:
+    description: gives you the Soul Dagger
+    usage: </souldagger>
+    permission-message: This Command doesn't exist
