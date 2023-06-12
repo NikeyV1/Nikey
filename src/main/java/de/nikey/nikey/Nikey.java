@@ -60,11 +60,12 @@ public final class Nikey extends JavaPlugin {
         getCommand("try").setExecutor(new Try());
         getCommand("souldagger").setExecutor(new soul_dagger());
         System.out.println("Plugin Done Loading");
+        //Test
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        System.out.println("Plugin stopped");
     }
     public static Nikey getPlugin() {
         return plugin;
