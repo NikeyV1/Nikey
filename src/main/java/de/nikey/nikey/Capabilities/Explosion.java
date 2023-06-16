@@ -1,9 +1,9 @@
 package de.nikey.nikey.Capabilities;
 
 import de.nikey.nikey.Nikey;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,21 +33,27 @@ public class Explosion implements Listener {
                         Vector v = p.getLocation().getDirection().multiply(1.4F).setY(0.5);
                         p.setVelocity(v);
                         p.setInvulnerable(false);
-                        p.setCooldown(Material.NETHERITE_SWORD,20*60);
+                        p.setCooldown(Material.NETHERITE_SWORD,20*20);
                     }else if (!p.isSneaking()){
                         Vector v = p.getLocation().getDirection().multiply(0).setY(+2);
                         p.setVelocity(v);
                         p.setInvulnerable(true);
-                        Thread.sleep(500);
-                        //
-                        Vector s = p.getLocation().getDirection().multiply(0).setY(-3);
-                        p.setVelocity(s);
-                        Thread.sleep(200);
-                        //
-                        p.getWorld().createExplosion(p.getLocation(),3F,true,true);
-                        p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK,1,1);
-                        p.setInvulnerable(false);
-                        p.setCooldown(Material.NETHERITE_SWORD,20*90);
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(Nikey.getPlugin(), new Runnable() {
+                            @Override
+                            public void run() {
+                                Vector s = p.getLocation().getDirection().multiply(0).setY(-2);
+                                p.setVelocity(s);
+                            }
+                        },30);
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(Nikey.getPlugin(), new Runnable() {
+                            @Override
+                            public void run() {
+                                p.getWorld().createExplosion(p.getLocation(),3F,true,true);
+                                p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK,5,1);
+                                p.setInvulnerable(false);
+                                p.setCooldown(Material.NETHERITE_SWORD,20*60);
+                            }
+                        },30);
                     }
                 }
             }
