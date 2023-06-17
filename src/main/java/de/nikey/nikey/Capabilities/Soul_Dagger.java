@@ -3,7 +3,9 @@ package de.nikey.nikey.Capabilities;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -50,6 +52,11 @@ public class Soul_Dagger implements Listener {
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) {
         LivingEntity entity = event.getEntity();
+        if (entity.getKiller().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.DARK_AQUA + "Soul Dagger")){
+            Location location = entity.getLocation();
+            location.add(0,1,0);
+            entity.getWorld().spawnParticle(Particle.SOUL,location,3);
+        }
         if (event.getEntity() instanceof Player){
             Player p = (Player) entity;
             Player killer = p.getKiller();

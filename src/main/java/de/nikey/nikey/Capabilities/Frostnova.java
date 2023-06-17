@@ -27,7 +27,10 @@ public class Frostnova implements Listener {
         Action action = event.getAction();
         ItemStack item = event.getItem();
         ItemMeta meta = item.getItemMeta();
-        if (action == Action.RIGHT_CLICK_AIR && item.getType() == Material.AMETHYST_CLUSTER && meta.getDisplayName().equalsIgnoreCase( "Frostnova")){
+        if (action == Action.RIGHT_CLICK_AIR && item.getType() == Material.AMETHYST_CLUSTER && meta.getDisplayName().equalsIgnoreCase( "Frostnova")) {
+            meta.setDisplayName("§1Frostnova");
+            item.setItemMeta(meta);
+        }else if (meta.getDisplayName().equalsIgnoreCase("§1Frostnova")){
             for (Entity e : p.getLocation().getWorld().getNearbyEntities(p.getLocation(),80,60,80)){
                 if (e instanceof Player){
                     if (!p.hasCooldown(Material.AMETHYST_CLUSTER)){
@@ -43,7 +46,7 @@ public class Frostnova implements Listener {
                                     notp.remove(player);
                                 }else {
                                     time++;
-                                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent("§l§e" + time));
+                                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent("§l§3" + time));
                                 }
                             }
                         };

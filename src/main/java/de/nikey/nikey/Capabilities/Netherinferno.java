@@ -1,6 +1,7 @@
 package de.nikey.nikey.Capabilities;
 
 import de.nikey.nikey.Nikey;
+import de.nikey.nikey.util.Scoreboardutils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
@@ -17,10 +18,13 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
 public class Netherinferno implements Listener {
-    public static ArrayList<Player> inferno = new ArrayList<>();
+    public static Boolean red;
+    public static HashMap<Player, Integer> map = new HashMap<>();
+    int i;
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player p = event.getPlayer();
@@ -28,17 +32,18 @@ public class Netherinferno implements Listener {
         String s = meta.getDisplayName();
         if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (s.equalsIgnoreCase( ChatColor.RED +"Inferno")){
+                red = true;
                 if (p.isSneaking()){
                     meta.setDisplayName(ChatColor.AQUA + "Inferno");
                     p.getItemInHand().setItemMeta(meta);
                 }else {
-                    if (!inferno.contains(p)){
+                    if (!map.containsKey(p)){
                         Fireball fireball = p.getWorld().spawn(p.getEyeLocation(),Fireball.class);
                         fireball.setVelocity(p.getLocation().getDirection().multiply(1.1));
                         fireball.setShooter(p);
                         fireball.setYield(4.2F);
-                        inferno.add(p);
-
+                        map.put(p,0);
+                        i = 0;
                         new BukkitRunnable(){
                             @Override
                             public void run() {
@@ -49,34 +54,48 @@ public class Netherinferno implements Listener {
                                 }
                             }
                         }.runTaskTimer(Nikey.getPlugin(),0L,2L);
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(Nikey.getPlugin(), new Runnable() {
+                        new BukkitRunnable(){
                             @Override
                             public void run() {
-                                inferno.remove(p);
-                                p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent(ChatColor.LIGHT_PURPLE+ "Restocked!"));
+                                if (map.get(p) < 40){
+                                    i++;
+                                    Scoreboardutils.setBaseScoreboard(p,i,false,false,true,true,false);
+                                    map.replace(p,i);
+                                }else {
+                                    map.remove(p);
+                                    cancel();
+                                }
                             }
-                        },20*60);
+                        }.runTaskTimer(Nikey.getPlugin(),0L,20);
                     }
                 }
             } else if (s.equalsIgnoreCase( ChatColor.AQUA + "Inferno")) {
+                red = false;
                 if (p.isSneaking()){
                     meta.setDisplayName(ChatColor.RED + "Inferno");
                     p.getItemInHand().setItemMeta(meta);
                 }else {
-                    if (!inferno.contains(p)){
-                        inferno.add(p);
+                    if (!map.containsKey(p)){
+                        map.put(p,0);
+                        i=0;
                         final Block b = p.getTargetBlock((Set)null, 8);
                         final Location loc = new Location(b.getWorld(), (double)b.getX(), (double)b.getY(), (double)b.getZ(), p.getLocation().getYaw(), p.getLocation().getPitch());
                         p.teleport(loc);
                         p.playSound(loc, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
 
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(Nikey.getPlugin(), new Runnable() {
+                        new BukkitRunnable(){
                             @Override
                             public void run() {
-                                inferno.remove(p);
-                                p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent(ChatColor.LIGHT_PURPLE+ "Restocked!"));
+                                if (map.get(p) < 8){
+                                    i++;
+                                    Scoreboardutils.setBaseScoreboard(p,i,false,false,true,false,false);
+                                    map.replace(p,i);
+                                }else {
+                                    map.remove(p);
+                                    cancel();
+                                }
                             }
-                        },20*8);
+                        }.runTaskTimer(Nikey.getPlugin(),0L,20);
                     }
                 }
             }else if (s.equalsIgnoreCase("Inferno")){
@@ -92,8 +111,9 @@ public class Netherinferno implements Listener {
         Player p = event.getPlayer();
         Entity entity = event.getRightClicked();
         if (p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase( ChatColor.AQUA+ "Inferno")){
-            if (!inferno.contains(p) && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Inferno")){
-                inferno.add(p);
+            if (!map.containsKey(p) && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Inferno")){
+                map.put(p,0);
+                i=0;
                 final Block b = p.getTargetBlock((Set)null, 8);
                 final Location loc = new Location(b.getWorld(), (double)b.getX(), (double)b.getY(), (double)b.getZ(), p.getLocation().getYaw(), p.getLocation().getPitch());
                 p.teleport(loc);
@@ -101,15 +121,20 @@ public class Netherinferno implements Listener {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20*5,0,true,true,true));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20*3,0,true,true,true));
                 entity.setFreezeTicks(20*4);
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Nikey.getPlugin(), new Runnable() {
+                new BukkitRunnable(){
                     @Override
                     public void run() {
-                        inferno.remove(p);
-                        p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent(ChatColor.LIGHT_PURPLE+ "Restocked!"));
+                        if (map.get(p) < 8){
+                            i++;
+                            Scoreboardutils.setBaseScoreboard(p,i,false,false,true,false,false);
+                            map.replace(p,i);
+                        }else {
+                            map.remove(p);
+                            cancel();
+                        }
                     }
-                },20*8);
-            }else if (!inferno.contains(p) && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED + "Inferno")){
-                inferno.add(p);
+                }.runTaskTimer(Nikey.getPlugin(),0L,20);
+            }else if (!map.containsKey(p) && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED + "Inferno")){
                 entity.setFireTicks(20*8);
                 if (event instanceof Player){
                     Player player = (Player) entity;

@@ -11,7 +11,7 @@ public class Death implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        Netherinferno.inferno.remove(player);
+        Netherinferno.map.remove(player);
         Nikey.nomove.remove(player);
         Nikey.player.remove(player);
     }

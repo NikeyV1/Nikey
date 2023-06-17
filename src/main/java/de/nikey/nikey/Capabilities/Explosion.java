@@ -1,6 +1,7 @@
 package de.nikey.nikey.Capabilities;
 
 import de.nikey.nikey.Nikey;
+import de.nikey.nikey.util.Scoreboardutils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
@@ -17,7 +18,7 @@ import org.bukkit.util.Vector;
 import java.util.HashMap;
 
 public class Explosion implements Listener {
-    HashMap<Player, Integer> map = new HashMap<>();
+    public static HashMap<Player, Integer> map = new HashMap<>();
     int i;
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) throws InterruptedException {
@@ -41,6 +42,7 @@ public class Explosion implements Listener {
                             public void run() {
                                 if (map.get(p) < 20){
                                     i++;
+                                    Scoreboardutils.setBaseScoreboard(p,i,false,true,false,false,false);
                                     p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent("§l§4" + i));
                                     map.replace(p,i);
                                 }else {
@@ -68,6 +70,7 @@ public class Explosion implements Listener {
                             public void run() {
                                 if (map.get(p) < 30){
                                     i++;
+                                    Scoreboardutils.setBaseScoreboard(p,i,true,true,false,false,false);
                                     p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent("§l§4" + i));
                                     map.replace(p,i);
                                 }else {
