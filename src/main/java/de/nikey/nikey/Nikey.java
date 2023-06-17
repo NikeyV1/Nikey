@@ -8,10 +8,7 @@ import de.nikey.nikey.Listener.NukeListener;
 import de.nikey.nikey.Tabcompleater.StatsTab;
 import de.nikey.nikey.hex.HexListener;
 import de.nikey.nikey.hex.hex;
-import de.nikey.nikey.playerlistener.Death;
-import de.nikey.nikey.playerlistener.Move;
-import de.nikey.nikey.playerlistener.lightning;
-import de.nikey.nikey.playerlistener.nomove;
+import de.nikey.nikey.playerlistener.*;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -24,6 +21,7 @@ public final class Nikey extends JavaPlugin {
     private static Nikey plugin;
     public static ArrayList<Player> player = new ArrayList<>();
     public static ArrayList<Player> nomove = new ArrayList<>();
+    public static ArrayList<Player> nodmg = new ArrayList<>();
 
 
     @Override
@@ -45,6 +43,7 @@ public final class Nikey extends JavaPlugin {
         plM.registerEvents(new lightning(),this);
         plM.registerEvents(new Soul_Dagger(),this);
         plM.registerEvents(new Join(), this);
+        plM.registerEvents(new NoDMG(),this);
 
         //Commands
         getCommand("heal").setExecutor(new Heal());

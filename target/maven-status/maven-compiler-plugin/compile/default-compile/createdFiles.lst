@@ -6,6 +6,7 @@ de\nikey\nikey\playerlistener\Move.class
 de\nikey\nikey\Command\soul_dagger.class
 de\nikey\nikey\playerlistener\Death.class
 de\nikey\nikey\Nikey.class
+de\nikey\nikey\Capabilities\Explosion$1.class
 de\nikey\nikey\Command\Last.class
 de\nikey\nikey\Command\Stats.class
 de\nikey\nikey\playerlistener\nomove.class
@@ -14,11 +15,15 @@ de\nikey\nikey\Tabcompleater\StatsTab.class
 de\nikey\nikey\Listener\NukeListener.class
 de\nikey\nikey\Capabilities\Emberedge.class
 de\nikey\nikey\Command\Heal.class
+de\nikey\nikey\Capabilities\Explosion$2.class
+de\nikey\nikey\playerlistener\NoDMG.class
 de\nikey\nikey\Capabilities\Netherinferno$1.class
 de\nikey\nikey\Capabilities\Netherinferno.class
 de\nikey\nikey\Capabilities\Explosion.class
+de\nikey\nikey\Capabilities\Explosion$4.class
 de\nikey\nikey\Command\Nuke.class
 de\nikey\nikey\playerlistener\lightning$1.class
+de\nikey\nikey\Capabilities\Explosion$5.class
 de\nikey\nikey\Command\Repair.class
 de\nikey\nikey\Capabilities\Frostnova$1.class
 de\nikey\nikey\Capabilities\Netherinferno$2.class
@@ -29,6 +34,8 @@ de\nikey\nikey\Command\Stats$Kit.class
 de\nikey\nikey\hex\hex.class
 de\nikey\nikey\Capabilities\Eclipse.class
 de\nikey\nikey\Capabilities\Soul_Dagger.class
+de\nikey\nikey\util\Scoreboardutils.class
 de\nikey\nikey\Command\Crash.class
 de\nikey\nikey\Listener\klickitem.class
 de\nikey\nikey\Capabilities\Enderling_Katana.class
+de\nikey\nikey\Capabilities\Explosion$3.class
