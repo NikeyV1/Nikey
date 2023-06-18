@@ -19,6 +19,8 @@ import java.util.HashMap;
 
 public class Explosion implements Listener {
     public static HashMap<Player, Integer> map = new HashMap<>();
+    public static HashMap<Player, Integer> numb = new HashMap<>();
+    public static HashMap<Player, Boolean> sneaking = new HashMap<>();
     int i;
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) throws InterruptedException {
@@ -32,19 +34,20 @@ public class Explosion implements Listener {
             }else if (itemMeta.getDisplayName().equalsIgnoreCase("§4Ignition Blade")){
                 if (!map.containsKey(p)){
                     if (!p.isSneaking()){
+                        sneaking.replace(p,false);
                         p.getWorld().createExplosion(p.getLocation(),2F,false,false);
                         Vector v = p.getLocation().getDirection().multiply(1.4F).setY(0.5);
                         p.setVelocity(v);
                         map.put(p,0);
                         i = 0;
+                        numb.replace(p,20);
                         new BukkitRunnable(){
                             @Override
                             public void run() {
                                 if (map.get(p) < 20){
                                     i++;
-                                    Scoreboardutils.setBaseScoreboard(p,i,false,true,false,false,false);
-                                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent("§l§4" + i));
                                     map.replace(p,i);
+                                    Scoreboardutils.setBaseScoreboard(p);
                                 }else {
                                     map.remove(p);
                                     cancel();
@@ -58,6 +61,7 @@ public class Explosion implements Listener {
                             }
                         },40);
                     }else if (p.isSneaking()){
+                        sneaking.replace(p,true);
                         Location location = p.getLocation();
                         Vector v = p.getLocation().getDirection().multiply(0).setY(+2);
                         p.setVelocity(v);
@@ -65,14 +69,15 @@ public class Explosion implements Listener {
                         map.put(p,0);
                         location.getWorld().createExplosion(p.getLocation(),2.8F,true,true);
                         i=0;
+                        numb.replace(p,30);
                         new BukkitRunnable(){
                             @Override
                             public void run() {
                                 if (map.get(p) < 30){
                                     i++;
-                                    Scoreboardutils.setBaseScoreboard(p,i,true,true,false,false,false);
-                                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent("§l§4" + i));
                                     map.replace(p,i);
+                                    Scoreboardutils.setBaseScoreboard(p);
+                                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent("§l§4" + i));
                                 }else {
                                     map.remove(p);
                                     cancel();

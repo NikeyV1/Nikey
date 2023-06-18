@@ -59,7 +59,7 @@ public class Netherinferno implements Listener {
                             public void run() {
                                 if (map.get(p) < 40){
                                     i++;
-                                    Scoreboardutils.setBaseScoreboard(p,i,false,false,true,true,false);
+                                    Scoreboardutils.setBaseScoreboard(p);
                                     map.replace(p,i);
                                 }else {
                                     map.remove(p);
@@ -76,19 +76,18 @@ public class Netherinferno implements Listener {
                     p.getItemInHand().setItemMeta(meta);
                 }else {
                     if (!map.containsKey(p)){
-                        map.put(p,0);
-                        i=0;
                         final Block b = p.getTargetBlock((Set)null, 8);
                         final Location loc = new Location(b.getWorld(), (double)b.getX(), (double)b.getY(), (double)b.getZ(), p.getLocation().getYaw(), p.getLocation().getPitch());
                         p.teleport(loc);
                         p.playSound(loc, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
-
+                        map.put(p,0);
+                        i=0;
                         new BukkitRunnable(){
                             @Override
                             public void run() {
                                 if (map.get(p) < 8){
                                     i++;
-                                    Scoreboardutils.setBaseScoreboard(p,i,false,false,true,false,false);
+                                    Scoreboardutils.setBaseScoreboard(p);
                                     map.replace(p,i);
                                 }else {
                                     map.remove(p);
@@ -112,28 +111,9 @@ public class Netherinferno implements Listener {
         Entity entity = event.getRightClicked();
         if (p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase( ChatColor.AQUA+ "Inferno")){
             if (!map.containsKey(p) && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Inferno")){
-                map.put(p,0);
-                i=0;
-                final Block b = p.getTargetBlock((Set)null, 8);
-                final Location loc = new Location(b.getWorld(), (double)b.getX(), (double)b.getY(), (double)b.getZ(), p.getLocation().getYaw(), p.getLocation().getPitch());
-                p.teleport(loc);
-                p.playSound(loc, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20*5,0,true,true,true));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20*3,0,true,true,true));
                 entity.setFreezeTicks(20*4);
-                new BukkitRunnable(){
-                    @Override
-                    public void run() {
-                        if (map.get(p) < 8){
-                            i++;
-                            Scoreboardutils.setBaseScoreboard(p,i,false,false,true,false,false);
-                            map.replace(p,i);
-                        }else {
-                            map.remove(p);
-                            cancel();
-                        }
-                    }
-                }.runTaskTimer(Nikey.getPlugin(),0L,20);
             }else if (!map.containsKey(p) && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED + "Inferno")){
                 entity.setFireTicks(20*8);
                 if (event instanceof Player){

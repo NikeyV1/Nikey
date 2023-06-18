@@ -1,10 +1,10 @@
 package de.nikey.nikey.Capabilities;
 
 import de.nikey.nikey.Nikey;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.ChatColor;
+import de.nikey.nikey.util.Scoreboardutils;
 import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,8 +17,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Frostnova implements Listener {
+    public static HashMap<Player, Integer> map = new HashMap<>();
     private int time;
     public static ArrayList<Player> notp = new ArrayList<>();
     @EventHandler
@@ -33,20 +35,23 @@ public class Frostnova implements Listener {
         }else if (meta.getDisplayName().equalsIgnoreCase("§1Frostnova")){
             for (Entity e : p.getLocation().getWorld().getNearbyEntities(p.getLocation(),80,60,80)){
                 if (e instanceof Player){
-                    if (!p.hasCooldown(Material.AMETHYST_CLUSTER)){
+                    if (!map.containsKey(p)){
                         Player player = (Player) e;
                         notp.add(player);
+                        p.spawnParticle(Particle.SNOWFLAKE,p.getLocation().add(0,1,0),4);
                         time = 0;
-                        p.setCooldown(Material.AMETHYST_CLUSTER,20*25);
-                        BukkitRunnable runnable = new BukkitRunnable() {
+                        map.put(p,0);
+                        BukkitRunnable runnable= new BukkitRunnable() {
                             @Override
                             public void run() {
-                                if (time == 25){
-                                    cancel();
-                                    notp.remove(player);
-                                }else {
+                                if (map.get(p) < 20){
                                     time++;
-                                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent("§l§3" + time));
+                                    map.replace(p,time);
+                                    Scoreboardutils.setBaseScoreboard(p);
+                                }else {
+                                    map.remove(p);
+                                    notp.remove(p);
+                                    cancel();
                                 }
                             }
                         };
