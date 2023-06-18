@@ -41,9 +41,10 @@ public class Netherinferno implements Listener {
                         Fireball fireball = p.getWorld().spawn(p.getEyeLocation(),Fireball.class);
                         fireball.setVelocity(p.getLocation().getDirection().multiply(1.1));
                         fireball.setShooter(p);
-                        fireball.setYield(4.2F);
+                        fireball.setYield(5F);
                         map.put(p,0);
                         i = 0;
+                        Scoreboardutils.setBaseScoreboard(p);
                         new BukkitRunnable(){
                             @Override
                             public void run() {
@@ -59,9 +60,11 @@ public class Netherinferno implements Listener {
                             public void run() {
                                 if (map.get(p) < 40){
                                     i++;
-                                    Scoreboardutils.setBaseScoreboard(p);
                                     map.replace(p,i);
+                                    Scoreboardutils.setBaseScoreboard(p);
+                                    p.setScoreboard(Scoreboardutils.setBaseScoreboard(p));
                                 }else {
+                                    i=0;
                                     map.remove(p);
                                     cancel();
                                 }
@@ -76,8 +79,8 @@ public class Netherinferno implements Listener {
                     p.getItemInHand().setItemMeta(meta);
                 }else {
                     if (!map.containsKey(p)){
-                        final Block b = p.getTargetBlock((Set)null, 8);
-                        final Location loc = new Location(b.getWorld(), (double)b.getX(), (double)b.getY(), (double)b.getZ(), p.getLocation().getYaw(), p.getLocation().getPitch());
+                        Block b = p.getTargetBlock((Set)null, 8);
+                        Location loc = new Location(b.getWorld(), (double)b.getX(), (double)b.getY(), (double)b.getZ(), p.getLocation().getYaw(), p.getLocation().getPitch());
                         p.teleport(loc);
                         p.playSound(loc, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
                         map.put(p,0);
@@ -87,8 +90,8 @@ public class Netherinferno implements Listener {
                             public void run() {
                                 if (map.get(p) < 8){
                                     i++;
-                                    Scoreboardutils.setBaseScoreboard(p);
                                     map.replace(p,i);
+                                    Scoreboardutils.setBaseScoreboard(p);
                                 }else {
                                     map.remove(p);
                                     cancel();

@@ -5,12 +5,12 @@ import de.nikey.nikey.util.Scoreboardutils;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -22,6 +22,7 @@ import java.util.HashMap;
 public class Frostnova implements Listener {
     public static HashMap<Player, Integer> map = new HashMap<>();
     private int time;
+    private int i;
     public static ArrayList<Player> notp = new ArrayList<>();
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
@@ -44,18 +45,43 @@ public class Frostnova implements Listener {
                         BukkitRunnable runnable= new BukkitRunnable() {
                             @Override
                             public void run() {
-                                if (map.get(p) < 20){
+                                if (map.get(p)==22){
+                                    notp.remove(p);
+                                }
+                                if (map.get(p) < 30){
                                     time++;
                                     map.replace(p,time);
                                     Scoreboardutils.setBaseScoreboard(p);
                                 }else {
-                                    map.remove(p);
-                                    notp.remove(p);
                                     cancel();
+                                    map.remove(p);
                                 }
                             }
                         };
                         runnable.runTaskTimer(Nikey.getPlugin(),0,20);
+                        i=0;
+                        new BukkitRunnable(){
+                            @Override
+                            public void run() {
+                                if (i == 22){
+                                    cancel();
+                                    i=0;
+                                }else {
+                                    i++;
+                                    for (Entity projectile : p.getLocation().getWorld().getNearbyEntities(p.getLocation(),30,20,30)){
+                                        if (projectile instanceof Arrow){
+                                            projectile.remove();
+                                        } else if (projectile instanceof WitherSkull) {
+                                            projectile.remove();
+                                        } else if (projectile instanceof SpectralArrow) {
+                                            projectile.remove();
+                                        }else if (projectile instanceof Snowball) {
+                                            projectile.remove();
+                                        }
+                                    }
+                                }
+                            }
+                        }.runTaskTimer(Nikey.getPlugin(),0L,10);
                     }
                 }
             }

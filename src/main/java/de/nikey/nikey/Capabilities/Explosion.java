@@ -19,7 +19,6 @@ import java.util.HashMap;
 
 public class Explosion implements Listener {
     public static HashMap<Player, Integer> map = new HashMap<>();
-    public static HashMap<Player, Integer> numb = new HashMap<>();
     public static HashMap<Player, Boolean> sneaking = new HashMap<>();
     int i;
     @EventHandler
@@ -36,11 +35,11 @@ public class Explosion implements Listener {
                     if (!p.isSneaking()){
                         sneaking.replace(p,false);
                         p.getWorld().createExplosion(p.getLocation(),2F,false,false);
-                        Vector v = p.getLocation().getDirection().multiply(1.4F).setY(0.5);
+                        Vector v = p.getLocation().getDirection().multiply(2.6F).setY(0.5);
                         p.setVelocity(v);
                         map.put(p,0);
                         i = 0;
-                        numb.replace(p,20);
+                        Scoreboardutils.setBaseScoreboard(p);
                         new BukkitRunnable(){
                             @Override
                             public void run() {
@@ -67,9 +66,9 @@ public class Explosion implements Listener {
                         p.setVelocity(v);
                         Nikey.nodmg.add(p);
                         map.put(p,0);
-                        location.getWorld().createExplosion(p.getLocation(),2.8F,true,true);
+                        Scoreboardutils.setBaseScoreboard(p);
+                        location.getWorld().createExplosion(p.getLocation(),3.2F,true,true);
                         i=0;
-                        numb.replace(p,30);
                         new BukkitRunnable(){
                             @Override
                             public void run() {
@@ -77,7 +76,6 @@ public class Explosion implements Listener {
                                     i++;
                                     map.replace(p,i);
                                     Scoreboardutils.setBaseScoreboard(p);
-                                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent("§l§4" + i));
                                 }else {
                                     map.remove(p);
                                     cancel();
@@ -90,7 +88,7 @@ public class Explosion implements Listener {
                                 Vector s = p.getLocation().getDirection().multiply(0).setY(-4);
                                 p.setVelocity(s);
                                 p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK,5,1);
-                                location.getWorld().createExplosion(location,3.2F,true,true);
+                                location.getWorld().createExplosion(location,3.6F,true,true);
                             }
                         },30);
                         Bukkit.getScheduler().scheduleSyncDelayedTask(Nikey.getPlugin(), new Runnable() {

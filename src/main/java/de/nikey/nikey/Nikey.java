@@ -2,7 +2,6 @@ package de.nikey.nikey;
 
 import de.nikey.nikey.Capabilities.*;
 import de.nikey.nikey.Command.*;
-import de.nikey.nikey.Listener.Join;
 import de.nikey.nikey.Listener.LastChance;
 import de.nikey.nikey.Listener.NukeListener;
 import de.nikey.nikey.Tabcompleater.StatsTab;

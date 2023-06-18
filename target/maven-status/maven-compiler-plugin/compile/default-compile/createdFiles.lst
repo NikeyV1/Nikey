@@ -1,7 +1,6 @@
 de\nikey\nikey\hex\HexListener.class
 de\nikey\nikey\playerlistener\lightning.class
 de\nikey\nikey\Command\Try.class
-de\nikey\nikey\Listener\Join.class
 de\nikey\nikey\playerlistener\Move.class
 de\nikey\nikey\Command\soul_dagger.class
 de\nikey\nikey\playerlistener\Death.class
@@ -13,6 +12,7 @@ de\nikey\nikey\playerlistener\nomove.class
 de\nikey\nikey\Capabilities\Netherinferno$3.class
 de\nikey\nikey\Tabcompleater\StatsTab.class
 de\nikey\nikey\Listener\NukeListener.class
+de\nikey\nikey\playerlistener\Join.class
 de\nikey\nikey\Capabilities\Emberedge.class
 de\nikey\nikey\Command\Heal.class
 de\nikey\nikey\Capabilities\Explosion$2.class
@@ -22,13 +22,13 @@ de\nikey\nikey\Capabilities\Netherinferno.class
 de\nikey\nikey\Capabilities\Explosion.class
 de\nikey\nikey\Capabilities\Explosion$4.class
 de\nikey\nikey\Command\Nuke.class
+de\nikey\nikey\Capabilities\Frostnova$2.class
 de\nikey\nikey\playerlistener\lightning$1.class
 de\nikey\nikey\Capabilities\Explosion$5.class
 de\nikey\nikey\Command\Repair.class
 de\nikey\nikey\Capabilities\Frostnova$1.class
 de\nikey\nikey\Capabilities\Netherinferno$2.class
 de\nikey\nikey\Capabilities\Frostnova.class
-de\nikey\nikey\Capabilities\Netherinferno$4.class
 de\nikey\nikey\Listener\LastChance.class
 de\nikey\nikey\Command\Stats$Kit.class
 de\nikey\nikey\hex\hex.class

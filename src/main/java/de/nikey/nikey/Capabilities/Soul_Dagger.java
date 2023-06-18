@@ -1,5 +1,6 @@
 package de.nikey.nikey.Capabilities;
 
+import de.nikey.nikey.util.Scoreboardutils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
@@ -32,17 +33,19 @@ public class Soul_Dagger implements Listener {
             if (p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.DARK_AQUA + "Soul Dagger")){
                 i = map.get(p);
                 if (hand.getType() == Material.DIAMOND_SWORD || hand.getType() == Material.NETHERITE_SWORD){
+                    Scoreboardutils.setBaseScoreboard(p);
                     if (i != null){
                         map.put(p,i+1);
                     }else {
                         map.put(p,1);
                     }
-                    if (i==15){
+                    if (i==12){
                         Random r = new Random();
                         int nint = r.nextInt(4);
                         map.put(p,0);
                         double maxHealth = p.getMaxHealth();
                         p.setHealth(p.getHealth()+nint);
+                        Scoreboardutils.setBaseScoreboard(p);
                     }
                 }
             }
