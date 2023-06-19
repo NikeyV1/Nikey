@@ -2,6 +2,7 @@ package de.nikey.nikey.Capabilities;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,6 +30,7 @@ public class Eclipse implements Listener {
                         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,20*20 ,2,false,false,false));
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,20*20 ,2,false,false,false));
                         double scale = player.getHealthScale();
+
                         player.setHealthScale(15);
                         player.damage(2);
                         double health = p.getHealth();
@@ -54,18 +56,20 @@ public class Eclipse implements Listener {
             if (action == Action.RIGHT_CLICK_AIR){
                 if (meta.getDisplayName().equalsIgnoreCase("Eclipse")){
                     for (Entity player : p.getNearbyEntities(80.0D, 8.0D, 80.0D)){
-                        if (player instanceof Player){
-                            Player pl = (Player) player;
-                            int dur = 20*30;
-                            if (!p.hasCooldown(Material.NETHERITE_SWORD)){
-                                pl.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING,dur ,1,false,false,false));
-                                pl.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,dur ,2,false,false,false));
-                                pl.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,dur ,1,false,false,false));
-                                pl.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,dur ,1,false,false,false));
-                                pl.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER,dur ,1,false,false,false));
+                        if (!p.hasCooldown(Material.NETHERITE_SWORD)){
+                            int dur = 600;
+                            PotionEffect effect= new PotionEffect(PotionEffectType.GLOWING,dur ,1,false,false,false);
+                            PotionEffect effect1 = new PotionEffect(PotionEffectType.SLOW,dur ,2,false,false,false);
+                            PotionEffect effect2 = new PotionEffect(PotionEffectType.BLINDNESS,dur ,2,false,false,false);
+                            PotionEffect effect3= new PotionEffect(PotionEffectType.WEAKNESS,dur ,1,false,false,false);
+                            PotionEffect effect4= new PotionEffect(PotionEffectType.HUNGER,dur ,1,false,false,false);
+                            effect4.apply((LivingEntity) player);
+                            effect3.apply((LivingEntity) player);
+                            effect2.apply((LivingEntity) player);
+                            effect1.apply((LivingEntity) player);
+                            effect.apply((LivingEntity) player);
 
-                                p.setCooldown(Material.NETHERITE_SWORD,20*120);
-                            }
+                            p.setCooldown(Material.NETHERITE_SWORD,20*120);
                         }
                     }
                 }
@@ -76,11 +80,16 @@ public class Eclipse implements Listener {
                             Player pl = (Player) player;
                             int dur = 20*30;
                             if (!p.hasCooldown(Material.NETHERITE_SWORD)){
-                                pl.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING,dur ,1,false,false,false));
-                                pl.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,dur ,2,false,false,false));
-                                pl.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,dur ,1,false,false,false));
-                                pl.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,dur ,1,false,false,false));
-                                pl.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER,dur ,1,false,false,false));
+                                PotionEffect effect= new PotionEffect(PotionEffectType.GLOWING,dur ,1,false,false,false);
+                                PotionEffect effect1 = new PotionEffect(PotionEffectType.SLOW,dur ,2,false,false,false);
+                                PotionEffect effect2 = new PotionEffect(PotionEffectType.BLINDNESS,dur ,2,false,false,false);
+                                PotionEffect effect3= new PotionEffect(PotionEffectType.WEAKNESS,dur ,1,false,false,false);
+                                PotionEffect effect4= new PotionEffect(PotionEffectType.HUNGER,dur ,1,false,false,false);
+                                effect4.apply((LivingEntity) player);
+                                effect3.apply((LivingEntity) player);
+                                effect2.apply((LivingEntity) player);
+                                effect1.apply((LivingEntity) player);
+                                effect.apply((LivingEntity) player);
 
                                 p.setCooldown(Material.NETHERITE_SWORD,20*120);
                             }

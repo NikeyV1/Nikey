@@ -9,11 +9,13 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.Potion;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ public class Frostnova implements Listener {
                     if (!map.containsKey(p)){
                         Player player = (Player) e;
                         notp.add(player);
+                        player.setFreezeTicks(40);
                         p.spawnParticle(Particle.SNOWFLAKE,p.getLocation().add(0,1,0),4);
                         time = 0;
                         map.put(p,0);
@@ -63,7 +66,7 @@ public class Frostnova implements Listener {
                         new BukkitRunnable(){
                             @Override
                             public void run() {
-                                if (i == 22){
+                                if (i == 60){
                                     cancel();
                                     i=0;
                                 }else {
@@ -81,12 +84,13 @@ public class Frostnova implements Listener {
                                     }
                                 }
                             }
-                        }.runTaskTimer(Nikey.getPlugin(),0L,10);
+                        }.runTaskTimer(Nikey.getPlugin(),0L,5);
                     }
                 }
             }
         }
     }
+
     @EventHandler
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         Player player = event.getPlayer();
