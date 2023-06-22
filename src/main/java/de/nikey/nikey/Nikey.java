@@ -75,6 +75,7 @@ public final class Nikey extends JavaPlugin {
         plM.registerEvents(new NoDMG(),this);
         plM.registerEvents(new VanishPickup(),this);
         plM.registerEvents(new LightningTrident(),this);
+        plM.registerEvents(new Satuationstatus(),this);
 
         //Commands
         getCommand("heal").setExecutor(new Heal());

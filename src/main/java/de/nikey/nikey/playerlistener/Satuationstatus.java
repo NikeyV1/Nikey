@@ -1,0 +1,22 @@
+package de.nikey.nikey.playerlistener;
+
+import de.nikey.nikey.Command.Stats;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
+
+public class Satuationstatus implements Listener {
+    @EventHandler
+    public void onFoodLevelChange(FoodLevelChangeEvent event) {
+        HumanEntity entity = event.getEntity();
+        if (entity instanceof Player){
+            Player p = (Player) entity;
+            if (Stats.saturation.contains(p)){
+                p.setFoodLevel(40);
+            }
+        }
+    }
+}
+

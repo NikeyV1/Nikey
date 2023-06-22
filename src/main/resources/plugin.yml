@@ -6,6 +6,7 @@ commands:
   heal:
     description: Heal Players or yourself
     usage: </heal>
+    aliases: [ h ]
     permission-message: This Command doesn't exist
   stats:
     description: modify player stats

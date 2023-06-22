@@ -20,7 +20,7 @@ public class Scoreboardutils {
         objective.getScore("Rank:").setScore(2);
         objective.getScore(player.isOp() ? "§cAdmin" : "§7Player").setScore(1);
         objective.getScore("§4").setScore(0);
-        //Ignition blade
+
         if (Explosion.typeone){
             if (!Explosion.map.containsKey(player) || Explosion.map.get(player) == 20){
                 objective.getScore("§4Ignition Blade: §aReady").setScore(6);
@@ -34,23 +34,20 @@ public class Scoreboardutils {
                 objective.getScore("§4Ignition Blade: " +"§f"+ Explosion.map.get(player)).setScore(6);
             }
         }
-        //Soul dagger
         objective.getScore("§3Soul Dagger: " +"§f"+ Soul_Dagger.map.get(player)+"/12").setScore(3);
-        //Inferno
-        if (Netherinferno.red == true){
-            if (!Netherinferno.map.containsKey(player) ||Netherinferno.map.get(player) == 40){
+        if (Netherinferno.red){
+            if (!Netherinferno.map.containsKey(player)){
                 objective.getScore("§cInferno: §aReady").setScore(5);
             }else {
                 objective.getScore("§cInferno: " + "§f" + Netherinferno.map.get(player)).setScore(5);
             }
         }else {
-            if (!Netherinferno.map.containsKey(player)||Netherinferno.map.get(player) == 40 ||Netherinferno.map.get(player) == 9){
+            if (!Netherinferno.map.containsKey(player)){
                 objective.getScore("§bInferno: §aReady").setScore(5);
             }else {
                 objective.getScore("§bInferno: " + "§f" + Netherinferno.map.get(player)).setScore(5);
             }
         }
-        //frostnova
         if (!Frostnova.map.containsKey(player)||Frostnova.map.get(player) == 30){
             objective.getScore("§1Frostnova: §aReady").setScore(4);
         }else {
