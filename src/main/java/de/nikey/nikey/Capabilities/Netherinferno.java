@@ -49,7 +49,7 @@ public class Netherinferno implements Listener {
                             @Override
                             public void run() {
                                 if (!fireball.isDead()){
-                                    fireball.getWorld().spawnParticle(Particle.FLAME,fireball.getLocation(),2);
+                                    fireball.getWorld().spawnParticle(Particle.FLAME,fireball.getLocation(),3);
                                 }else {
                                     cancel();
                                 }

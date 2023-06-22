@@ -56,8 +56,8 @@ public class Frostnova implements Listener {
                                     map.replace(p,time);
                                     Scoreboardutils.setBaseScoreboard(p);
                                 }else {
-                                    cancel();
                                     map.remove(p);
+                                    cancel();
                                 }
                             }
                         };

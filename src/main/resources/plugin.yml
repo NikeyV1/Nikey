@@ -43,3 +43,8 @@ commands:
     description: gives you the Soul Dagger
     usage: </souldagger>
     permission-message: This Command doesn't exist
+  vanish:
+    description: Hide from other players.
+    default: op
+    aliases: [ v ]
+    permission-message: This Command doesn't exist
