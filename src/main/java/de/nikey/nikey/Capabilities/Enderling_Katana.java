@@ -39,12 +39,14 @@ public class Enderling_Katana implements Listener {
                             p.setInvulnerable(true);
                             for (Entity entity : p.getNearbyEntities(10,10,10)){
                                 Location loc = entity.getLocation();
+                                entity.setGlowing(true);
                                 i=0;
                                 new BukkitRunnable(){
                                     @Override
                                     public void run() {
                                         if (i <10){
                                             i++;
+                                            entity.setGlowing(false);
                                             entity.getWorld().strikeLightning(loc);
                                         }else {
                                             cancel();
@@ -58,15 +60,6 @@ public class Enderling_Katana implements Listener {
                             p.getWorld().playSound(p.getLocation(),Sound.ENTITY_WARDEN_SONIC_BOOM,100,1);
                             Vector v = p.getLocation().getDirection().multiply(1.5F).setY(1F);
                             p.setVelocity(v);
-                            Thread.sleep(500);
-                            p.getWorld().createExplosion(p.getLocation(),2,false,false);
-                            p.getWorld().spawnParticle(Particle.FLASH,p.getLocation(),5);
-                            Thread.sleep(500);
-                            p.getWorld().spawnParticle(Particle.FLASH,p.getLocation(),5);
-                            p.getWorld().createExplosion(p.getLocation(),2,false,false);
-                            Thread.sleep(500);
-                            p.getWorld().spawnParticle(Particle.FLASH,p.getLocation(),5);
-                            p.getWorld().createExplosion(p.getLocation(),2,false,false);
                             Thread.sleep(500);
                             Vector s = p.getLocation().getDirection().multiply(0).setY(-1.5F);
                             //p.setVelocity(s);

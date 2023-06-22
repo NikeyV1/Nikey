@@ -1,0 +1,11 @@
+#Colors do not work for "action-bar-message"!
+
+action-bar-message: "Vanished"
+
+vanish-message: "&aYou are now invisible."
+
+unvanish-message: "&bYou are no longer invisible."
+
+no-access-message: "&cYou do not have access to this command."
+
+reload-message: "&6SimpleVanish &ahas been reloaded."

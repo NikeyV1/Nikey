@@ -2,7 +2,6 @@ package de.nikey.nikey.Listener;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +14,7 @@ public class LightningTrident implements Listener {
         if (event.getDamager() instanceof Player && event.getEntity() instanceof LivingEntity){
             Player player = (Player) event.getDamager();
             LivingEntity livingEntity = (LivingEntity) event.getEntity();
-            if (player.getInventory().getItemInMainHand().getEnchantments().containsKey(Enchantment.CHANNELING) && player.getInventory().getItemInMainHand().getType() == Material.TRIDENT){
+            if (player.getInventory().getItemInMainHand().getEnchantments().containsKey(Enchantment.CHANNELING) && player.getInventory().getItemInMainHand().getType() == Material.TRIDENT && player.getWorld().isThundering()){
                 player.getWorld().strikeLightning(livingEntity.getLocation());
             }
         }
