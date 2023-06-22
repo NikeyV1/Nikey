@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 public class Explosion implements Listener {
     public static HashMap<Player, Integer> map = new HashMap<>();
-    public static HashMap<Player, Boolean> sneaking = new HashMap<>();
+    public static Boolean typeone;
     int i;
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) throws InterruptedException {
@@ -33,7 +33,7 @@ public class Explosion implements Listener {
             }else if (itemMeta.getDisplayName().equalsIgnoreCase("§4Ignition Blade")){
                 if (!map.containsKey(p)){
                     if (!p.isSneaking()){
-                        sneaking.replace(p,false);
+                        typeone = true;
                         p.getWorld().createExplosion(p.getLocation(),2F,false,false);
                         Vector v = p.getLocation().getDirection().multiply(2.6F).setY(0.5);
                         p.setVelocity(v);
@@ -60,7 +60,7 @@ public class Explosion implements Listener {
                             }
                         },40);
                     }else if (p.isSneaking()){
-                        sneaking.replace(p,true);
+                        typeone = false;
                         Location location = p.getLocation();
                         Vector v = p.getLocation().getDirection().multiply(0).setY(+2);
                         p.setVelocity(v);

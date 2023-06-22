@@ -17,7 +17,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -32,12 +31,12 @@ public class Netherinferno implements Listener {
         String s = meta.getDisplayName();
         if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (s.equalsIgnoreCase( ChatColor.RED +"Inferno")){
-                red = true;
                 if (p.isSneaking()){
                     meta.setDisplayName(ChatColor.AQUA + "Inferno");
                     p.getItemInHand().setItemMeta(meta);
                 }else {
                     if (!map.containsKey(p)){
+                        red = true;
                         Fireball fireball = p.getWorld().spawn(p.getEyeLocation(),Fireball.class);
                         fireball.setVelocity(p.getLocation().getDirection().multiply(1.1));
                         fireball.setShooter(p);
@@ -58,11 +57,10 @@ public class Netherinferno implements Listener {
                         new BukkitRunnable(){
                             @Override
                             public void run() {
+                                Scoreboardutils.setBaseScoreboard(p);
+                                i++;
                                 if (map.get(p) < 40){
-                                    i++;
                                     map.replace(p,i);
-                                    Scoreboardutils.setBaseScoreboard(p);
-                                    p.setScoreboard(Scoreboardutils.setBaseScoreboard(p));
                                 }else {
                                     i=0;
                                     map.remove(p);
@@ -73,12 +71,12 @@ public class Netherinferno implements Listener {
                     }
                 }
             } else if (s.equalsIgnoreCase( ChatColor.AQUA + "Inferno")) {
-                red = false;
                 if (p.isSneaking()){
                     meta.setDisplayName(ChatColor.RED + "Inferno");
                     p.getItemInHand().setItemMeta(meta);
                 }else {
                     if (!map.containsKey(p)){
+                        red = false;
                         Block b = p.getTargetBlock((Set)null, 8);
                         Location loc = new Location(b.getWorld(), (double)b.getX(), (double)b.getY(), (double)b.getZ(), p.getLocation().getYaw(), p.getLocation().getPitch());
                         p.teleport(loc);
@@ -88,13 +86,17 @@ public class Netherinferno implements Listener {
                         new BukkitRunnable(){
                             @Override
                             public void run() {
+                                i++;
+                                Scoreboardutils.setBaseScoreboard(p);
                                 if (map.get(p) < 8){
-                                    i++;
                                     map.replace(p,i);
-                                    Scoreboardutils.setBaseScoreboard(p);
                                 }else {
-                                    map.remove(p);
+                                    map.replace(p,9);
+                                    Scoreboardutils.setBaseScoreboard(p);
+                                    i=0;
                                     cancel();
+                                    map.remove(p);
+                                    Scoreboardutils.setBaseScoreboard(p);
                                 }
                             }
                         }.runTaskTimer(Nikey.getPlugin(),0L,20);

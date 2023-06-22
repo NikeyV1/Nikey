@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Stats implements CommandExecutor {
+
+    public static ArrayList<Player> saturation = new ArrayList<>();
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player){
@@ -39,10 +41,18 @@ public class Stats implements CommandExecutor {
                                 p.sendMessage(ChatColor.AQUA + "You toggled:Flight from " + player.getName());;
                                 player.setFlying(true);
                             }
-                        } else if (args[1].equalsIgnoreCase("f")) {
+                        } else if (args[1].equalsIgnoreCase("Health")) {
                             player.setHealthScale(20);
                             player.setHealth(20);
                             p.sendMessage(ChatColor.AQUA + "You Reseted:Health from " + player.getName());
+                        }else if (args[1].equalsIgnoreCase("Saturation")) {
+                            if(!saturation.contains(player)){
+                                saturation.add(player);
+                                p.sendMessage(ChatColor.AQUA + "You toggled:Saturation from " + player.getName());
+                            }else {
+                                saturation.remove(player);
+                                p.sendMessage(ChatColor.AQUA + "You toggled:Saturation from " + player.getName());;
+                            }
                         }
                     }
                 }else {
