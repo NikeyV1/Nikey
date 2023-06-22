@@ -19,6 +19,7 @@ de\nikey\nikey\Capabilities\Eclipse.class
 de\nikey\nikey\Capabilities\Soul_Dagger.class
 de\nikey\nikey\util\Scoreboardutils.class
 de\nikey\nikey\Listener\LightningTrident.class
+de\nikey\nikey\playerlistener\Satuationstatus.class
 de\nikey\nikey\hex\HexListener.class
 de\nikey\nikey\playerlistener\lightning.class
 de\nikey\nikey\Command\Vanish.class
