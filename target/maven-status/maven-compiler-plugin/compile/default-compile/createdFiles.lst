@@ -1,5 +1,6 @@
 de\nikey\nikey\Command\Try.class
 de\nikey\nikey\playerlistener\Move.class
+de\nikey\nikey\playerlistener\backcmd.class
 de\nikey\nikey\Command\Last.class
 de\nikey\nikey\Command\Stats.class
 de\nikey\nikey\Capabilities\Netherinferno$3.class
@@ -41,6 +42,7 @@ de\nikey\nikey\Capabilities\Frostnova$1.class
 de\nikey\nikey\Capabilities\Netherinferno$2.class
 de\nikey\nikey\Capabilities\Frostnova.class
 de\nikey\nikey\Command\Stats$Kit.class
+de\nikey\nikey\Command\back.class
 de\nikey\nikey\playerlistener\VanishPickup.class
 de\nikey\nikey\Command\Crash.class
 de\nikey\nikey\Listener\klickitem.class

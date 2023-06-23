@@ -1,5 +1,6 @@
 package de.nikey.nikey.playerlistener;
 
+import de.nikey.nikey.Command.Stats;
 import de.nikey.nikey.Nikey;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -14,6 +15,7 @@ public class Satuationstatus implements Listener {
         if (entity instanceof Player){
             Player p = (Player) entity;
             if (Nikey.saturation.contains(p)){
+                p.setFoodLevel(40);
                 event.setFoodLevel(40);
                 event.setCancelled(true);
             }

@@ -35,10 +35,10 @@ public class Stats implements CommandExecutor {
                             if(player.isFlying()){
                                 player.setAllowFlight(false);
                                 player.setFlying(false);
-                                p.sendMessage(ChatColor.AQUA + "You toggled:Flight from " + player.getName());
+                                p.sendMessage(ChatColor.AQUA + "You toggled:Flight from off " + player.getName());
                             }else {
                                 player.setAllowFlight(true);
-                                p.sendMessage(ChatColor.AQUA + "You toggled:Flight from " + player.getName());;
+                                p.sendMessage(ChatColor.AQUA + "You toggled:Flight on from " + player.getName());;
                                 player.setFlying(true);
                             }
                         } else if (args[1].equalsIgnoreCase("Health")) {
