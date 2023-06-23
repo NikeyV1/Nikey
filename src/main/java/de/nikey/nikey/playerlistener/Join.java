@@ -13,6 +13,5 @@ public class Join implements Listener {
         Player p = event.getPlayer();
         event.setJoinMessage("§e"+p.getName() + " joined");
         Scoreboardutils.setBaseScoreboard(p);
-        Scoreboard scoreboard = p.getScoreboard();
     }
 }

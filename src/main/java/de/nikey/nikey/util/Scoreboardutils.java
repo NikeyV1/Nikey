@@ -36,7 +36,7 @@ public class Scoreboardutils {
         }
         objective.getScore("§3Soul Dagger: " +"§f"+ Soul_Dagger.map.get(player)+"/12").setScore(3);
         if (Netherinferno.red){
-            if (!Netherinferno.map.containsKey(player)){
+            if (!Netherinferno.map.containsKey(player)||Netherinferno.map.get(player) == 30){
                 objective.getScore("§cInferno: §aReady").setScore(5);
             }else {
                 objective.getScore("§cInferno: " + "§f" + Netherinferno.map.get(player)).setScore(5);

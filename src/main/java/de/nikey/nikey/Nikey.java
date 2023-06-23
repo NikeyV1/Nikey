@@ -12,6 +12,7 @@ import de.nikey.nikey.playerlistener.*;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -19,10 +20,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 
 public final class Nikey extends JavaPlugin {
@@ -30,6 +28,8 @@ public final class Nikey extends JavaPlugin {
     public static ArrayList<Player> player = new ArrayList<>();
     public static ArrayList<Player> nomove = new ArrayList<>();
     public static ArrayList<Player> nodmg = new ArrayList<>();
+    public static HashMap<Player, Location> location = new HashMap<>();
+    public static ArrayList<Player> saturation = new ArrayList<>();
 
     public Set<UUID> vanishedList;
 
@@ -76,6 +76,7 @@ public final class Nikey extends JavaPlugin {
         plM.registerEvents(new VanishPickup(),this);
         plM.registerEvents(new LightningTrident(),this);
         plM.registerEvents(new Satuationstatus(),this);
+        plM.registerEvents(new backcmd(),this);
 
         //Commands
         getCommand("heal").setExecutor(new Heal());
@@ -91,6 +92,7 @@ public final class Nikey extends JavaPlugin {
         getCommand("try").setExecutor(new Try());
         getCommand("souldagger").setExecutor(new soul_dagger());
         getCommand("vanish").setExecutor(new Vanish());
+        getCommand("back").setExecutor(new back());
         System.out.println("Plugin Done Loading");
     }
 

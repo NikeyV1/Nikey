@@ -33,7 +33,7 @@ commands:
     usage: </repair>
     permission-message: This Command doesn't exist
   chance:
-    description: 798352789346
+    description: fewgfwbquhaüqwadfplenvt
     usage: </4657893456>
     permission-message: This Command doesn't exist
   try:
@@ -48,4 +48,8 @@ commands:
     description: Hide from other players.
     default: op
     aliases: [ v ]
+    permission-message: This Command doesn't exist
+  back:
+    description: teleports you back tp your last death location
+    usage: </back>
     permission-message: This Command doesn't exist

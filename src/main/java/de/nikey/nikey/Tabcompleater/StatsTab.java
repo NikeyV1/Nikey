@@ -18,6 +18,7 @@ public class StatsTab implements TabCompleter {
             list.add("Invulnerable");
             list.add("Flight");
             list.add("Health");
+            list.add("Saturation");
         }
         if (args.length == 1){
             for (Player player : Bukkit.getOnlinePlayers()){

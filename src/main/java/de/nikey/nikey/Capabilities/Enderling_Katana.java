@@ -36,19 +36,19 @@ public class Enderling_Katana implements Listener {
                     p.getWorld().spawnParticle(Particle.ELECTRIC_SPARK,p.getLocation(),10);
                     Bukkit.getScheduler().runTaskLater((Plugin) Nikey.getPlugin(), () -> {
                         try {
-                            p.setInvulnerable(true);
-                            for (Entity entity : p.getNearbyEntities(10,10,10)){
+                            Nikey.nodmg.add(p);
+                            for (Entity entity : p.getNearbyEntities(12,12,12)){
                                 Location loc = entity.getLocation();
                                 entity.setGlowing(true);
                                 i=0;
                                 new BukkitRunnable(){
                                     @Override
                                     public void run() {
-                                        if (i <10){
+                                        if (i <12){
                                             i++;
-                                            entity.setGlowing(false);
                                             entity.getWorld().strikeLightning(loc);
                                         }else {
+                                            entity.setGlowing(false);
                                             cancel();
                                         }
                                     }
@@ -64,7 +64,7 @@ public class Enderling_Katana implements Listener {
                             Vector s = p.getLocation().getDirection().multiply(0).setY(-1.5F);
                             //p.setVelocity(s);
                             Thread.sleep(100);
-                            p.setInvulnerable(false);
+                            Nikey.nodmg.remove(p);
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }

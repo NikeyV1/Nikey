@@ -26,6 +26,7 @@ public class Frostnova implements Listener {
     private int time;
     private int i;
     public static ArrayList<Player> notp = new ArrayList<>();
+    public static ArrayList<Player> user = new ArrayList<>();
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player p = event.getPlayer();
@@ -45,11 +46,13 @@ public class Frostnova implements Listener {
                         p.spawnParticle(Particle.SNOWFLAKE,p.getLocation().add(0,1,0),4);
                         time = 0;
                         map.put(p,0);
+                        user.add(p);
                         BukkitRunnable runnable= new BukkitRunnable() {
                             @Override
                             public void run() {
                                 if (map.get(p)==22){
                                     notp.remove(p);
+                                    user.remove(p);
                                 }
                                 if (map.get(p) < 30){
                                     time++;
@@ -72,19 +75,19 @@ public class Frostnova implements Listener {
                                 }else {
                                     i++;
                                     for (Entity projectile : p.getLocation().getWorld().getNearbyEntities(p.getLocation(),30,20,30)){
-                                        if (projectile instanceof Arrow){
+                                        if (projectile instanceof Arrow && ((Arrow) projectile).getShooter() != p){
                                             projectile.remove();
-                                        } else if (projectile instanceof WitherSkull) {
+                                        } else if (projectile instanceof WitherSkull && ((WitherSkull) projectile).getShooter() != p) {
                                             projectile.remove();
-                                        } else if (projectile instanceof SpectralArrow) {
+                                        } else if (projectile instanceof SpectralArrow && ((SpectralArrow) projectile).getShooter() != p) {
                                             projectile.remove();
-                                        }else if (projectile instanceof Snowball) {
+                                        }else if (projectile instanceof Snowball && ((Snowball) projectile).getShooter() != p) {
                                             projectile.remove();
                                         }
                                     }
                                 }
                             }
-                        }.runTaskTimer(Nikey.getPlugin(),0L,5);
+                        }.runTaskTimer(Nikey.getPlugin(),0L,5L);
                     }
                 }
             }
@@ -94,7 +97,7 @@ public class Frostnova implements Listener {
     @EventHandler
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         Player player = event.getPlayer();
-        if (notp.contains(player)){
+        if (notp.contains(player) && !user.contains(player)){
             event.setCancelled(true);
         }
     }

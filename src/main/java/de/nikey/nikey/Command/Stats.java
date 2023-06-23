@@ -1,5 +1,6 @@
 package de.nikey.nikey.Command;
 
+import de.nikey.nikey.Nikey;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -17,7 +18,6 @@ import java.util.List;
 
 public class Stats implements CommandExecutor {
 
-    public static ArrayList<Player> saturation = new ArrayList<>();
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player){
@@ -46,12 +46,12 @@ public class Stats implements CommandExecutor {
                             player.setHealth(20);
                             p.sendMessage(ChatColor.AQUA + "You Reseted:Health from " + player.getName());
                         }else if (args[1].equalsIgnoreCase("Saturation")) {
-                            if(!saturation.contains(player)){
-                                saturation.add(player);
-                                p.sendMessage(ChatColor.AQUA + "You toggled:Saturation from " + player.getName());
+                            if(!Nikey.saturation.contains(player)){
+                                Nikey.saturation.add(player);
+                                p.sendMessage(ChatColor.AQUA + "You toggled:Saturation on from " + player.getName());
                             }else {
-                                saturation.remove(player);
-                                p.sendMessage(ChatColor.AQUA + "You toggled:Saturation from " + player.getName());;
+                                Nikey.saturation.remove(player);
+                                p.sendMessage(ChatColor.AQUA + "You toggled:Saturation off from " + player.getName());;
                             }
                         }
                     }
