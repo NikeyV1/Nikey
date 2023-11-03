@@ -92,7 +92,6 @@ public class Netherinferno implements Listener {
                                     map.replace(p,i);
                                 }else {
                                     map.replace(p,9);
-                                    Scoreboardutils.setBaseScoreboard(p);
                                     i=0;
                                     cancel();
                                     map.remove(p);
